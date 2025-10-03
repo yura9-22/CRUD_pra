@@ -40,3 +40,47 @@
 .read-the-docs {
   color: #888;
 }
+
+.container {
+  text-align: canter;
+  color: #333;
+  /*border-bottom: 2px solid #eee;*/
+  padding-bottom: 10px;
+}
+
+.todo-list {
+ text-style: none;
+ padding: 0;
+}
+.todo-list li {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.todo-list li input[type="checkbox"] {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+}
+
+.todo-completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.error-message {
+  color: red;
+  background-color: #ffeaea;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.no-todos {
+  text-align: center;
+  color: #666;
+  margin-top: 20px;
+}
