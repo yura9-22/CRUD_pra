@@ -8,6 +8,7 @@ function TodoList() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [newTodoTitle, setNewTodoTitle] = useState('');
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -25,6 +26,30 @@ function TodoList() {
 
     fetchTodos();
   }, []);
+
+  const handleInputChange = (event) => {
+    setNewTodoTitle(event.target.value);
+  };
+
+  const handleCreateTodo = async (event) => {
+    event.preventDefault();
+
+    if (!newTodoTitle.trim()) return;
+
+    try {
+      const response = await axios.post(API_URL, {
+        title: newTodoTitle,
+        completed: false,
+      });
+
+      setTodos([...todos, response.data]);
+      setNewTodoTitle(''); 
+
+    } catch (err) {
+      console.error("TODO作成エラー:", err);
+      setError("TODOの作成に失敗しました。");
+    }
+    }
 
   if (loading){
     return (
@@ -45,6 +70,17 @@ function TodoList() {
   return (
     <div className="container">
       <h1>TODOリスト</h1>
+
+      <form onSubmit={handleCreateTodo} className="todo-form">
+        <input
+          type="text"
+          value={newTodoTitle}
+          onChange={handleInputChange}
+          placeholder="新しいTODOを入力"
+        />
+        <button type="submit">追加</button>
+      </form>
+
       <ul className="todo-list">
         {todos.map((todo) => (
           <li key={todo.id}
